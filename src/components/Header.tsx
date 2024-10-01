@@ -2,7 +2,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div className=" bg-gray-800 text-white p-4">
+      Header
+    </div>
   )
 }
 
