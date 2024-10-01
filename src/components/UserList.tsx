@@ -33,12 +33,12 @@ const UsersList: React.FC = () => {
             <table className="w-full border-collapse text-right">
                 <thead>
                     <tr>
-                        <th className="border border-gray-300 bg-gray-200 font-bold">שם</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold">שם משפחה</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold">טלפון נייד</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold">דואר אלקטרוני</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold">תפקיד</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold">סיסמה</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">שם</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">שם משפחה</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">טלפון נייד</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">דואר אלקטרוני</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">תפקיד</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">סיסמה</th>
                         <th className="border border-gray-300">פעולות</th>
                     </tr>
                 </thead>
