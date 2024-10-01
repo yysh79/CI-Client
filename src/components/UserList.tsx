@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ExportButton from './ExportButton';
 
 interface User {
     _id: string;
@@ -31,36 +30,35 @@ const UsersList: React.FC = () => {
     return (
         <>
             <h1 className="text-xl font-bold mb-4">נתוני משתמשים</h1>
-            <ExportButton/>
             <table className="w-full border-collapse text-right">
                 <thead>
                     <tr>
-                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">שם</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">שם משפחה</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">טלפון נייד</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">דואר אלקטרוני</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">תפקיד</th>
-                        <th className="border border-gray-300 bg-gray-200 font-bold text-right">סיסמה</th>
-                        <th className="border border-gray-300">פעולות</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">פעולות</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">סיסמה</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">תפקיד</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">דואר אלקטרוני</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">טלפון נייד</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם משפחה</th>
+                        <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם</th>
                     </tr>
                 </thead>
                 <tbody>
                     {dataBase.map((user) => (
-                        <tr key={user._id} className="hover:bg-gray-300">
-                            <td className="border border-gray-300 bg-white p-2 text-right">{user.firstName}</td>
-                            <td className="border border-gray-300 bg-white p-2 text-right">{user.lastName}</td>
-                            <td className="border border-gray-300 bg-white p-2 text-right">{user.phone}</td>
-                            <td className="border border-gray-300 bg-white p-2 text-right">{user.email}</td>
-                            <td className="border border-gray-300 bg-white p-2 text-right">{user.role}</td>
-                            <td className="border border-gray-300 bg-white p-2 text-right">******</td>
-                            <td className="border border-gray-300 bg-white p-2 text-center">
+                        <tr key={user._id} className={`hover:bg-gray-300  'bg-white'}`}>
+                            <td className="border border-gray-300 p-2 text-center">
                                 <i className="material-icons text-gray-500 mx-2 cursor-pointer hover:text-gray-700">
                                     delete
                                 </i>
-                                <i className="material-icons text-gray-500 mx-2 cursor-pointer  hover:text-gray-700">
+                                <i className="material-icons text-gray-500 mx-2 cursor-pointer hover:text-gray-700">
                                     edit
                                 </i>
                             </td>
+                            <td className="border border-gray-300 p-2 text-right">******</td>
+                            <td className="border border-gray-300 p-2 text-right">{user.role}</td>
+                            <td className="border border-gray-300 p-2 text-right">{user.email}</td>
+                            <td className="border border-gray-300 p-2 text-right">{user.phone}</td>
+                            <td className="border border-gray-300 p-2 text-right">{user.lastName}</td>
+                            <td className="border border-gray-300 p-2 text-right">{user.firstName}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -70,3 +68,4 @@ const UsersList: React.FC = () => {
 };
 
 export default UsersList;
+
