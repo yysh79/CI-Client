@@ -5,7 +5,7 @@ function Sidebar() {
   return (
     <div className='w-[200px] h-screen bg-green-400'>
       <h1>Sidebar.</h1>
-      <Link  to={'/usersTable'}>משתמשים</Link>
+      <Link  to={'/usersList'}>משתמשים</Link>
     </div>
   )
 }
