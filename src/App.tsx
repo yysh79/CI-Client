@@ -1,6 +1,7 @@
 
 
 import './App.css'
+import ExportButton from './components/ExportButton';
 import Home from './pages/home/Home';
 
 export default function App() {
@@ -12,6 +13,8 @@ export default function App() {
     </div>
     <br />
     <h1 className="text-orange-600 bg-blue-600 ">Try</h1>
+    <br />
+    <ExportButton/>
     </>
   );
 }
