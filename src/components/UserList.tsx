@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ExportButton from './ExportButton';
+
+
+
+
 interface User {
     _id: string;
     firstName: string;
@@ -29,6 +33,7 @@ const UsersList: React.FC = () => {
 
     return (
         <>
+        <ExportButton/>
             <h1 className="text-xl font-bold mb-4">נתוני משתמשים</h1>
             <table className="w-full border-collapse text-right">
                 <thead>
