@@ -4,7 +4,7 @@ const ConfirmationDialogue: React.FC = () => {
     const [showDiv, setShowDiv] = useState<boolean>(false);
 
     const enter = () => setShowDiv(true);
-    const leav = () => setShowDiv(false);
+    const leave= () => setShowDiv(false);
 
 
     return (
@@ -21,7 +21,7 @@ const ConfirmationDialogue: React.FC = () => {
                         </button>
                         <button
                             className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
-                            onClick={leav}
+                            onClick={leave}
                         >
                             לא
                         </button>
