@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
 import ConfirmationDialogue from './ConfirmationDialogue';
 import EditButton from './EditButton';
+
+import ExportButton from './ExportButton';
+
+
+
+
 
 interface User {
     _id: string;
@@ -31,6 +38,7 @@ const UsersList: React.FC = () => {
 
     return (
         <>
+        <ExportButton/>
             <h1 className="text-xl font-bold mb-4">נתוני משתמשים</h1>
             <table className="w-full border-collapse text-right ">
                 <thead>
