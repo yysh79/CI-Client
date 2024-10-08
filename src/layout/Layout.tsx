@@ -6,7 +6,7 @@ import Sidebar from '../components/Sidebar'
 function Layout() {
     return (
         <div className='h-screen flex '>
-            <Sidebar/>
+            
             <div className=' flex flex-col w-screen h-screen '>
             <Header />
                 <div className='flex-grow'>
@@ -14,6 +14,7 @@ function Layout() {
                 </div>
                 <Footer />
             </div>
+            <Sidebar/>
         </div>
     )
 }

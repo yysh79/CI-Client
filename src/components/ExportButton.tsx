@@ -1,4 +1,5 @@
 import React from 'react';
+import { RiFileExcel2Line } from "react-icons/ri";
 
 const ExportButton: React.FC = () => {
     const handleExport = async () => {
@@ -16,7 +17,7 @@ const ExportButton: React.FC = () => {
 
             // קבלת הקובץ
             const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob); 
+            const url = window.URL.createObjectURL(blob);
 
             // יצירת קישור להורדה
             const a = document.createElement('a');
@@ -32,7 +33,8 @@ const ExportButton: React.FC = () => {
     };
 
     return (
-        <button onClick={handleExport} className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Export Users to Excel</button>
+        <button onClick={handleExport}
+         className=" bg-gray-500 flex text-white font-bold py-2 px-4 rounded hover:text-gray-300 items-center gap-5 transition duration-300">ייצוא לאקסל<RiFileExcel2Line size={20} /></button>
     );
 };
 
