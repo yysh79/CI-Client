@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
 import ConfirmationDialogue from './ConfirmationDialogue';
 import EditButton from './EditButton';
-
 import ExportButton from './ExportButton';
-
-
-
+import UserForm from './UserForm';
 
 
 interface User {
@@ -38,10 +34,11 @@ const UsersList: React.FC = () => {
 
     return (
         <>
-        <div className="flex p-5">
-        <ExportButton />
-        </div>
-           
+            <div className="flex p-5">
+                <UserForm />
+                <ExportButton />
+            </div>
+
             <div className="p-5 pt-0">
                 <table className="w-full border-collapse text-right ">
                     <thead>
