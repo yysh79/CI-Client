@@ -38,7 +38,7 @@ const UsersList: React.FC = () => {
 
     return (
         <>
-        <div className="flex bg-gray-100 p-5">
+        <div className="flex p-5">
         <ExportButton />
         </div>
            
@@ -57,7 +57,7 @@ const UsersList: React.FC = () => {
                     </thead>
                     <tbody>
                         {dataBase.map((user) => (
-                            <tr key={user._id} className={`hover:bg-gray-300  'bg-white'}`}>
+                            <tr key={user._id} className={`  'bg-white'}`}>
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
                                         <ConfirmationDialogue />
