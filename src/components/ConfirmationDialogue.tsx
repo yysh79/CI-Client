@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Delete from './delete';
+import Delete from './Delete';
 interface ConfirmationDialogueProps {
     userId: string;
 }
