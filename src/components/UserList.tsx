@@ -4,6 +4,7 @@ import ConfirmationDialogue from './ConfirmationDialogue';
 import EditButton from './EditButton';
 
 import ExportButton from './ExportButton';
+import UserForm from './UserForm';
 
 
 
@@ -60,8 +61,9 @@ const UsersList: React.FC = () => {
                             <tr key={user._id} className={`  'bg-white'}`}>
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
-                                        <ConfirmationDialogue userId={user._id}/>
-                                        <EditButton />
+                                    <ConfirmationDialogue userId={user._id}/>  
+                                    <EditButton user={user} /> 
+                                
                                     </div>
                                 </td>
                                 <td className="border border-gray-300 p-2 text-right">******</td>
