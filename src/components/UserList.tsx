@@ -34,7 +34,7 @@ const UsersList: React.FC = () => {
 
     return (
         <>
-            <div className="flex p-5">
+            <div className="flex gap-10 p-5">
                 <UserForm />
                 <ExportButton />
             </div>

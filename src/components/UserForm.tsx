@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { IoPersonAdd } from "react-icons/io5";
 
 interface UserFormProps {
   onSubmit: (data: any) => void;
@@ -114,10 +115,12 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     <div>
       {/* כפתור לפתיחת המודאל */}
       <button
-        className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+        className="bg-gray-500 flex items-center gap-5 text-white py-2 px-4 rounded-md hover:text-gray-300 transition duration-300"
         onClick={() => setIsModalOpen(true)}
       >
         הוסף משתמש
+        <IoPersonAdd />
+
       </button>
 
       {/* הודעת שרת */}
