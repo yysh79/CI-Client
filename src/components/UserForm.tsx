@@ -1,12 +1,34 @@
 import React, { useState } from 'react';
 import { IoPersonAdd } from "react-icons/io5";
 
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  idNumber: string;
+  phone: string;
+  password: string;
+  email: string;
+  city: string;
+  role: string;
+}
+
+interface FormErrors {
+  firstName: string;
+  lastName: string;
+  idNumber: string;
+  phone: string;
+  password: string;
+  email: string;
+  city: string;
+  role: string;
+}
 interface UserFormProps {
   onSubmit: (data: any) => void;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     idNumber: '',
@@ -17,7 +39,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     role: ''
   });
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<FormErrors>({
     firstName: '',
     lastName: '',
     idNumber: '',
@@ -96,7 +118,6 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log(formData);
       try {
         const response = await fetch('http://localhost:3000/users/addUsers', {
           method: 'POST',
@@ -130,14 +151,15 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     setTimeout(() => {
       setServerMessage('');
   }, 3000);
-      onSubmit(data.data);
+
+  onSubmit(data.data);
       
       } catch (error) {
         setServerMessage('שגיאה בשרת, נא לנסות שוב מאוחר יותר.');
-      }
-      setIsModalOpen(false); // סגירת המודאל לאחר שליחת הטופס
+      } finally {
+        setIsModalOpen(false);  // סגירת המודאל לאחר שליחת הטופס
     }
-    
+  } 
   };
 
   return (
