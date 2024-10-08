@@ -13,7 +13,8 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     phone: '',
     password: '',
     email: '', // הוספת שדה אימייל
-    city: ''
+    city: '',
+    role: ''
   });
 
   const [errors, setErrors] = useState({
@@ -23,7 +24,8 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     phone: '',
     password: '',
     email: '', // הודעת שגיאה לאימייל
-    city: ''
+    city: '',
+    role: ''
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +33,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = { firstName: '', lastName: '', idNumber: '', phone: '', password: '', email: '', city: '' };
+    const newErrors = { firstName: '', lastName: '', idNumber: '', phone: '', password: '', email: '', city: '',role: '' };
 
     // ולידציה של שם פרטי
     if (!/^[a-zA-Z\u0590-\u05FF]+$/.test(formData.firstName) || formData.firstName.length < 2) {
@@ -77,6 +79,12 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
       isValid = false;
     }
 
+    //ולידציה של תפקיד
+    if (formData.role === '') {
+      newErrors.role = 'יש לבחור תפקיד';
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
@@ -88,6 +96,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
+      console.log(formData);
       try {
         const response = await fetch('http://localhost:3000/users/addUsers', {
           method: 'POST',
@@ -97,18 +106,21 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
           body: JSON.stringify(formData),
         });
 
-        const data = await response.json();
-        if (response.ok) {
-          setServerMessage('משתמש נוסף בהצלחה!');
-          onSubmit(formData);
-        } else {
-          setServerMessage(`התרחשה שגיאה: ${data.message}`);
-        }
+        if (!response.ok) {
+          const errorData = await response.json(); 
+          setServerMessage(`התרחשה שגיאה: ${errorData.displayMessage || 'שגיאה לא ידועה'}`);
+          return;
+      }
+
+      const data = await response.json();
+      setServerMessage('משתמש נוסף בהצלחה!');
+      onSubmit(data.data);
       } catch (error) {
         setServerMessage('שגיאה בשרת, נא לנסות שוב מאוחר יותר.');
       }
       setIsModalOpen(false); // סגירת המודאל לאחר שליחת הטופס
     }
+    
   };
 
   return (
@@ -262,6 +274,28 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
                   <span className="text-red-500 text-sm">{errors.city} <i className="fas fa-exclamation-circle"></i></span>
                 )}
               </div>
+
+
+              {/* בחירת תפקיד */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">תפקיד</label>
+                <select
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className={`mt-1 block w-full p-2 border ${errors.role ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+                  required
+                >
+                  <option value="">בחר תפקיד</option>
+                  <option value="admin">מנהל</option>
+                  <option value="user">משתמש</option>
+                </select>
+                {errors.role && (
+                  <span className="text-red-500 text-sm">{errors.role} <i className="fas fa-exclamation-circle"></i></span>
+                )}
+              </div>
+
+            
 
               <button
                 type="submit"
