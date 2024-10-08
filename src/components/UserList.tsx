@@ -1,40 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import ConfirmationDialogue from './ConfirmationDialogue';
-import EditButton from './EditButton';
+import ConfirmationDialogue from "./ConfirmationDialogue";
 
-import ExportButton from './ExportButton';
+import EditButton from "./EditButton";
 
-
-
-
+import ExportButton from "./ExportButton";
 
 interface User {
-    _id: string;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    role: string;
-    password: string;
+  _id: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  role: string;
+  password: string;
+}
+
+interface EditButtonProps {
+  user: User;
 }
 
 const UsersList: React.FC = () => {
-    const [dataBase, setDataBase] = useState<User[]>([]);
+  const [dataBase, setDataBase] = useState<User[]>([]);
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch('http://localhost:3000/users/getAllUsers');
-            const users: User[] = await response.json();
-            setDataBase(users);
-        } catch (error) {
-            console.log('Error: ', error);
-        }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/users/getAllUsers");
+      const users: User[] = await response.json();
+      setDataBase(users);
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
     return (
         <>
@@ -81,4 +82,3 @@ const UsersList: React.FC = () => {
 };
 
 export default UsersList;
-
