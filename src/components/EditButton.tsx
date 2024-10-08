@@ -15,6 +15,7 @@ interface EditButtonProps {
 
 const EditButton: React.FC<EditButtonProps> = ({ user }) => {
   const [showDiv, setShowDiv] = useState<boolean>(false);
+  const [editedUser, setEditedUser] = useState<User>({ ...user });
   const dialogRef = useRef<HTMLDivElement>(null);
 
   const enter = () => setShowDiv(true);
@@ -37,6 +38,25 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
     };
   }, []);
 
+  // Handle input changes
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: keyof User
+  ) => {
+    setEditedUser({
+      ...editedUser,
+      [field]: event.target.value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("Updated user:", editedUser);
+    // Here, you would typically update the user via an API or save it to state
+    leave(); // Close the dialog after submission
+  };
+
   return (
     <div className="relative">
       <i
@@ -51,7 +71,7 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
       {showDiv && (
         <div
           ref={dialogRef}
-          className="absolute z-10 bg-white border border-gray-300 shadow-lg rounded-lg p-4 mt-2 w-72 transition-opacity duration-200" // Reduced width to 72
+          className="absolute z-10 bg-white border border-gray-300 shadow-lg rounded-lg p-4 mt-2 w-72 transition-opacity duration-200"
           role="dialog"
           aria-labelledby="dialog-title"
           aria-modal="true"
@@ -62,7 +82,7 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
           >
             עדכון מידע משתמש
           </h3>
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/** First Name Input */}
             <div>
               <label className="block text-gray-700 mb-1" htmlFor="firstName">
@@ -71,7 +91,8 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
               <input
                 type="text"
                 id="firstName"
-                defaultValue={user.firstName}
+                value={editedUser.firstName}
+                onChange={(e) => handleInputChange(e, "firstName")}
                 className="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -84,7 +105,8 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
               <input
                 type="text"
                 id="lastName"
-                defaultValue={user.lastName}
+                value={editedUser.lastName}
+                onChange={(e) => handleInputChange(e, "lastName")}
                 className="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -97,7 +119,8 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
               <input
                 type="text"
                 id="phone"
-                defaultValue={user.phone}
+                value={editedUser.phone}
+                onChange={(e) => handleInputChange(e, "phone")}
                 className="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -108,9 +131,10 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
                 אימייל
               </label>
               <input
-                type="text"
+                type="email"
                 id="email"
-                defaultValue={user.email}
+                value={editedUser.email}
+                onChange={(e) => handleInputChange(e, "email")}
                 className="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -123,7 +147,8 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
               <input
                 type="text"
                 id="role"
-                defaultValue={user.role}
+                value={editedUser.role}
+                onChange={(e) => handleInputChange(e, "role")}
                 className="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -136,30 +161,28 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
               <input
                 type="password"
                 id="password"
-                defaultValue={user.password}
+                value={editedUser.password}
+                onChange={(e) => handleInputChange(e, "password")}
                 className="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-          </div>
 
-          <div className="mt-6 flex justify-end space-x-2">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onClick={() => {
-                // Add your updated user logic here
-                console.log("User updated:", user);
-                leave();
-              }}
-            >
-              עדכן
-            </button>
-            <button
-              className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
-              onClick={leave}
-            >
-              בטל
-            </button>
-          </div>
+            <div className="mt-6 flex justify-end space-x-2">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                עדכן
+              </button>
+              <button
+                type="button"
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                onClick={leave}
+              >
+                בטל
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </div>
