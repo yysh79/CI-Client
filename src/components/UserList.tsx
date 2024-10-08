@@ -61,7 +61,7 @@ const UsersList: React.FC = () => {
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
                                         <ConfirmationDialogue />
-                                        <EditButton />
+                                        <EditButton user={user} />
                                     </div>
                                 </td>
                                 <td className="border border-gray-300 p-2 text-right">******</td>
