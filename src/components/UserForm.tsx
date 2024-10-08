@@ -148,11 +148,15 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
         role: ''
     });
 
+    setIsModalOpen(false);
+
+    onSubmit(data.data);
+
     setTimeout(() => {
       setServerMessage('');
   }, 3000);
 
-  onSubmit(data.data);
+
       
       } catch (error) {
         setServerMessage('שגיאה בשרת, נא לנסות שוב מאוחר יותר.');
