@@ -4,8 +4,6 @@ interface ConfirmationDialogueProps {
     leave: () => void;
 }
 
-
-
 const Delete: React.FC<ConfirmationDialogueProps> = ({ userId, leave }) => {
 
     const deleteUser = async () => {
@@ -15,6 +13,7 @@ const Delete: React.FC<ConfirmationDialogueProps> = ({ userId, leave }) => {
             });
             if (response.ok) {
                 leave();
+                window.location.reload(); 
             }
         } catch (error) {
             console.error(error)
