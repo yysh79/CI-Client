@@ -115,7 +115,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
       const data = await response.json();
       setServerMessage('משתמש נוסף בהצלחה!');
       onSubmit(data.data);
-      window.location.reload(); //מאתחל את הדף אחרי הוספת משתמש
+       window.location.reload(); //מאתחל את הדף אחרי הוספת משתמש
       } catch (error) {
         setServerMessage('שגיאה בשרת, נא לנסות שוב מאוחר יותר.');
       }
