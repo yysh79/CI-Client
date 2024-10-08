@@ -11,6 +11,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     idNumber: '',
     phone: '',
     password: '',
+    email: '', // הוספת שדה אימייל
     city: ''
   });
 
@@ -19,14 +20,17 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     lastName: '',
     idNumber: '',
     phone: '',
+    password: '',
+    email: '', // הודעת שגיאה לאימייל
     city: ''
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [serverMessage, setServerMessage] = useState(''); // משתנה לתגובה מהשרת
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = { firstName: '', lastName: '', idNumber: '', phone: '', city: '' };
+    const newErrors = { firstName: '', lastName: '', idNumber: '', phone: '', password: '', email: '', city: '' };
 
     // ולידציה של שם פרטי
     if (!/^[a-zA-Z\u0590-\u05FF]+$/.test(formData.firstName) || formData.firstName.length < 2) {
@@ -52,6 +56,20 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
       isValid = false;
     }
 
+    // ולידציה של סיסמא
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      newErrors.password = 'סיסמא לא תקינה: חייבת להכיל לפחות 8 תווים, אות גדולה, אות קטנה, וספרה אחת לפחות';
+      isValid = false;
+    }
+
+    // ולידציה של אימייל
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'כתובת אימייל לא תקינה';
+      isValid = false;
+    }
+
     // ולידציה של עיר
     if (formData.city === '') {
       newErrors.city = 'יש לבחור עיר';
@@ -66,10 +84,28 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      onSubmit(formData);
+      try {
+        const response = await fetch('http://localhost:3000/users/addUsers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          setServerMessage('משתמש נוסף בהצלחה!');
+          onSubmit(formData);
+        } else {
+          setServerMessage(`התרחשה שגיאה: ${data.message}`);
+        }
+      } catch (error) {
+        setServerMessage('שגיאה בשרת, נא לנסות שוב מאוחר יותר.');
+      }
       setIsModalOpen(false); // סגירת המודאל לאחר שליחת הטופס
     }
   };
@@ -84,6 +120,11 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
         הוסף משתמש
       </button>
 
+      {/* הודעת שרת */}
+      {serverMessage && (
+        <div className="text-center text-sm text-red-500 mb-4">{serverMessage}</div>
+      )}
+
       {/* מודאל */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
@@ -95,6 +136,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
               ✖
             </button>
             <form onSubmit={handleSubmit}>
+              {/* שדה שם פרטי */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">שם פרטי</label>
                 <input
@@ -125,6 +167,23 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
                 />
                 {errors.lastName && (
                   <span className="text-red-500 text-sm">{errors.lastName} <i className="fas fa-exclamation-circle"></i></span>
+                )}
+              </div>
+
+              {/* שדה אימייל */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">אימייל</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`mt-1 block w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md`}
+                  placeholder="הכנס כתובת אימייל"
+                  required
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-sm">{errors.email} <i className="fas fa-exclamation-circle"></i></span>
                 )}
               </div>
 
@@ -170,9 +229,13 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  className={`mt-1 block w-full p-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md`}
                   placeholder="הכנס סיסמא"
+                  required
                 />
+                {errors.password && (
+                  <span className="text-red-500 text-sm">{errors.password} <i className="fas fa-exclamation-circle"></i></span>
+                )}
               </div>
 
               {/* בחירת עיר */}
