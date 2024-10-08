@@ -11,9 +11,9 @@ function Sidebar() {
 
   return (
     <>
-    {isSideBarVisible? <div className=' ml-auto w-[200px] h-screen bg-green-100 '>
-      <h1>Sidebar.</h1>
-      <Link  to={'/usersList'}>משתמשים</Link>
+    {isSideBarVisible? <div className='flex-col pt-5 text-center ml-auto w-[200px] h-screen  bg-gray-500'>
+      
+      <Link className='text-white text-2xl  hover:text-gray-300 transition duration-300' to={'/usersList'}>משתמשים</Link>
     </div>: <></>}
     </>
     
