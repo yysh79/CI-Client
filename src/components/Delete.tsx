@@ -8,12 +8,12 @@ const Delete: React.FC<ConfirmationDialogueProps> = ({ userId, leave }) => {
 
     const deleteUser = async () => {
         try {
-           const response = await fetch(`http://localhost:3000/users/deleteUser/${userId}`, {
+            const response = await fetch(`http://localhost:3000/users/deleteUser/${userId}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
                 leave();
-                window.location.reload(); 
+                window.location.reload();
             }
         } catch (error) {
             console.error(error)

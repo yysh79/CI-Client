@@ -57,7 +57,7 @@ const UsersList: React.FC = () => {
                             <tr key={user._id} className={`  'bg-white'}`}>
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
-                                        <ConfirmationDialogue />
+                                        <ConfirmationDialogue userId={user._id}/>
                                         <EditButton user={user} />
                                     </div>
                                 </td>
