@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IoPersonAdd } from "react-icons/io5";
+import AddUserButton from './AddUserButton';
 
 
 interface FormData {
@@ -7,9 +8,9 @@ interface FormData {
   lastName: string;
   idNumber: string;
   phone: string;
-  password: string;
   email: string;
   city: string;
+  password: string;
   role: string;
 }
 
@@ -18,9 +19,9 @@ interface FormErrors {
   lastName: string;
   idNumber: string;
   phone: string;
-  password: string;
   email: string;
   city: string;
+  password: string;
   role: string;
 }
 interface UserFormProps {
@@ -33,9 +34,9 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     lastName: '',
     idNumber: '',
     phone: '',
-    password: '',
     email: '', // הוספת שדה אימייל
     city: '',
+    password: '',
     role: ''
   });
 
@@ -44,9 +45,9 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
     lastName: '',
     idNumber: '',
     phone: '',
-    password: '',
     email: '', // הודעת שגיאה לאימייל
     city: '',
+    password: '',
     role: ''
   });
 
@@ -55,7 +56,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
 
   const validateForm = () => {
     let isValid = true;
-    const newErrors = { firstName: '', lastName: '', idNumber: '', phone: '', password: '', email: '', city: '',role: '' };
+    const newErrors = { firstName: '', lastName: '', idNumber: '', phone: '', password: '', email: '', city: '', role: '' };
 
     // ולידציה של שם פרטי
     if (!/^[a-zA-Z\u0590-\u05FF]+$/.test(formData.firstName) || formData.firstName.length < 2) {
@@ -128,42 +129,43 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
         });
 
         if (!response.ok) {
-          const errorData = await response.json(); 
+          const errorData = await response.json();
           setServerMessage(`התרחשה שגיאה: ${errorData.displayMessage || 'שגיאה לא ידועה'}`);
           return;
-      }
+        }
 
-      const data = await response.json();
-      setServerMessage('משתמש נוסף בהצלחה!');
-
-       
-      setFormData({
-        firstName: '',
-        lastName: '',
-        idNumber: '',
-        phone: '',
-        password: '',
-        email: '',
-        city: '',
-        role: ''
-    });
-
-    setIsModalOpen(false);
-
-    onSubmit(data.data);
-
-    setTimeout(() => {
-      setServerMessage('');
-  }, 3000);
+        const data = await response.json();
+        setServerMessage('משתמש נוסף בהצלחה!');
 
 
-      
+        setFormData({
+          firstName: '',
+          lastName: '',
+          idNumber: '',
+          phone: '',
+          email: '', // הודעת שגיאה לאימייל
+          city: '',
+          password: '',
+          role: ''
+        });
+
+        setIsModalOpen(false);
+
+        onSubmit(data.data);
+
+        setTimeout(() => {
+          setServerMessage('');
+        }, 3000);
+
+
+
       } catch (error) {
         setServerMessage('שגיאה בשרת, נא לנסות שוב מאוחר יותר.');
       } finally {
         setIsModalOpen(false);  // סגירת המודאל לאחר שליחת הטופס
+        window.location.reload();
+      }
     }
-  } 
   };
 
   return (
@@ -337,12 +339,10 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit }) => {
                   <span className="text-red-500 text-sm">{errors.role} <i className="fas fa-exclamation-circle"></i></span>
                 )}
               </div>
-
-            
-
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+                onClick={handleSubmit}
               >
                 הוסף משתמש
               </button>
