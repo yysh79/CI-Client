@@ -27,10 +27,40 @@ const UsersList: React.FC = () => {
             console.log('Error: ', error);
         }
     };
+    ////
+    const updateUser = (updatedUser: User) => {
+        setDataBase((prevUsers) =>
+            prevUsers.map((user) => (user._id === updatedUser._id ? updatedUser : user))
+        );
+    };
+    ////    
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    const updateUserInDB = async (updatedUser: User) => {
+        try {
+            const response = await fetch(`http://localhost:3000/users/updateUser/${updatedUser._id}`, {
+                method: 'PUT', // או PATCH אם אתה מעדיף
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUser),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to update user');
+            }
+    
+            const updatedUserResponse = await response.json();
+            // עדכן את הרשימה עם המשתמש המעודכן
+            updateUser(updatedUserResponse);
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
+    };
+    
 
     return (
         <>
@@ -58,7 +88,7 @@ const UsersList: React.FC = () => {
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
                                         <ConfirmationDialogue userId={user._id}/>
-                                        <EditButton user={user} />
+                                        <EditButton user={user}  updateUser={updateUser} updateUserInDB={updateUserInDB} />
                                     </div>
                                 </td>
                                 <td className="border border-gray-300 p-2 text-right">******</td>
