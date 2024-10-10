@@ -1,16 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 function Login() {
+
+    const [email, setEmail] = useState(''); 
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+
+        try {
+            const response = await fetch('http://localhost:3000/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+
+                console.log('Login successful:', data);
+            } else {
+                setError(data.message || 'Login failed');
+            }
+        } catch (error) {
+            setError('Network error');
+        } finally {
+            setLoading(false);
+        }
+       };
     return (
         <div className='flex justify-center items-center min-h-screen bg-[url("/images/background-login.jpg")] bg-cover bg-center'>
             <div className="bg-gray-200 bg-opacity-80 p-8 rounded-lg shadow-lg max-w-md w-full">
                 <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">התחברות</h1>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 text-right">אימייל</label>
                         <input 
                             type="email"  
                             placeholder="הכנס את האימייל שלך" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-right" 
                         />
                     </div>
@@ -19,12 +55,17 @@ function Login() {
                         <input 
                             type="password" 
                             placeholder="הכנס את הסיסמא שלך" 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-right"
                         />
                     </div>
+                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                     <button 
                         type="submit" 
-                        className="w-full bg-blue-500 text-white py-3 px-4 rounded-md font-bold hover:bg-blue-600 transition duration-300 shadow-md">
+                        className={`w-full ${loading ? 'bg-gray-400' : 'bg-blue-500'} text-white py-3 px-4 rounded-md font-bold hover:bg-blue-600 transition duration-300 shadow-md`}
+                        disabled={loading}
+                        >
                         כניסה
                     </button>
                 </form>
