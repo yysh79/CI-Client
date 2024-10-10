@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LogIn() {
+function Login() {
     return (
         <div className='flex justify-center items-center min-h-screen bg-[url("/images/background-login.jpg")] bg-cover bg-center'>
             <div className="bg-gray-200 bg-opacity-80 p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -36,5 +36,5 @@ function LogIn() {
     )
 }
 
-export default LogIn
+export default Login
 

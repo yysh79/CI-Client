@@ -60,12 +60,33 @@ const UsersList: React.FC = () => {
             console.error('Error updating user:', error);
         }
     };
+
+    const handleSubmit = async (newUser: User) => {
+        try {
+            const response = await fetch('http://localhost:3000/users/addUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newUser),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add user');
+            }
+
+            const addedUser = await response.json();
+            setDataBase((prevUsers) => [...prevUsers, addedUser]);
+        } catch (error) {
+            console.error('Error adding user:', error);
+        }
+    };
     
 
     return (
         <>
             <div className="flex gap-10 p-5">
-                <UserForm />
+                <UserForm onSubmit={handleSubmit}/>
                 <ExportButton />
             </div>
 
