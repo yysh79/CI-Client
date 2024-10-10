@@ -27,7 +27,7 @@ function Login() {
 
             if (response.ok) {
                 console.log('Login successful:', data);
-                setSuccessMessage('התחברות בהצלחה !');
+                setSuccessMessage('! התחברות בהצלחה');
                 setTimeout(() => {
                     setSuccessMessage('');
                 }, 3000);
