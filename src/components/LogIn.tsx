@@ -5,11 +5,13 @@ function Login() {
     const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setSuccessMessage('');
 
 
         try {
@@ -24,8 +26,11 @@ function Login() {
             const data = await response.json();
 
             if (response.ok) {
-
                 console.log('Login successful:', data);
+                setSuccessMessage('התחברות בהצלחה !');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                }, 3000);
             } else {
                 setError(data.message || 'Login failed');
             }
@@ -61,6 +66,7 @@ function Login() {
                         />
                     </div>
                     {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                    {successMessage && <p className="text-green-500 text-sm text-center">{successMessage}</p>}
                     <button 
                         type="submit" 
                         className={`w-full ${loading ? 'bg-gray-400' : 'bg-blue-500'} text-white py-3 px-4 rounded-md font-bold hover:bg-blue-600 transition duration-300 shadow-md`}
