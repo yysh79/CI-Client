@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { showSideBar } from '../store/sideBarSlice';
 import { AppDispatch } from '../store/store';
 import { Link, useLocation } from 'react-router-dom';
-import SearchDialogue from './SearchDialogue';
+
 import LogOut from './LogOut';
 const Header = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -27,7 +27,6 @@ const Header = () => {
       
       {location.pathname === '/usersList' && (
         <div className="flex items-center justify-center flex-1">
-          <SearchDialogue/>
         </div>
       )}
 
