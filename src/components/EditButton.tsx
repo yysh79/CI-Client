@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface User {
+  _id: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -11,9 +12,11 @@ interface User {
 
 interface EditButtonProps {
   user: User;
+  updateUser: (updatedUser: User) => void;
+  updateUserInDB: (updatedUser: User) => void;
 }
 
-const EditButton: React.FC<EditButtonProps> = ({ user }) => {
+const EditButton: React.FC<EditButtonProps> = ({ user ,updateUser ,updateUserInDB }) => {
   const [showDiv, setShowDiv] = useState<boolean>(false);
   const [editedUser, setEditedUser] = useState<User>({ ...user });
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -50,9 +53,11 @@ const EditButton: React.FC<EditButtonProps> = ({ user }) => {
   };
 
   // Handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log("Updated user:", editedUser);
+    updateUser(editedUser);
+    await updateUserInDB(editedUser); 
     // Here, you would typically update the user via an API or save it to state
     leave(); // Close the dialog after submission
   };
