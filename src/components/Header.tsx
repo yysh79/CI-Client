@@ -7,7 +7,7 @@ import { showSideBar } from '../store/sideBarSlice';
 import { AppDispatch } from '../store/store';
 import { Link, useLocation } from 'react-router-dom';
 import SearchDialogue from './SearchDialogue';
-
+import LogOut from './LogOut';
 const Header = () => {
   const dispatch: AppDispatch = useDispatch();
   const handleClick = (): void => { dispatch(showSideBar()) };
