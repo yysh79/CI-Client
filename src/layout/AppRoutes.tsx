@@ -4,7 +4,7 @@ import Layout from './Layout'
 import Home from '../pages/home/Home'
 import UsersList from '../components/UserList'
 import Login from '../components/Login';
-
+import Otp from '../components/Otp'
 function AppRoutes() {
     return (
         <BrowserRouter>
@@ -13,6 +13,7 @@ function AppRoutes() {
                 <Route index element={<Home />} />
                 <Route path='login' element={<Login/>} />
                  <Route path='/usersList' element={<UsersList />} />
+                 <Route path='/otp' element={<Otp/>} />
                 </Route>
             </Routes>
         </BrowserRouter>

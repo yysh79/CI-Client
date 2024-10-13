@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import { Link} from 'react-router-dom';
+import Otp from './Otp'
 function Login() {
 
     const [email, setEmail] = useState(''); 
@@ -75,6 +76,11 @@ function Login() {
                         כניסה
                     </button>
                 </form>
+                   
+                   <button ><p  className={`w-full ${loading ? 'bg-gray-400' : 'bg-blue-500'} text-white py-3 px-4 rounded-md font-bold hover:bg-blue-600 transition duration-300 shadow-md`}>
+                       <Link to={"/otp"}>סיסמא במייל</Link>
+                   </p>
+                </button>
                 <p className="mt-6 text-center text-sm text-gray-600">
                     אין לך חשבון? <a href="#" className="text-blue-500 hover:underline">צור חשבון</a>
                 </p>
