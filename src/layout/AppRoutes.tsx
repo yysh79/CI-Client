@@ -10,9 +10,9 @@ function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Layout />} >
-                <Route index element={<Home />} />
-                <Route path='/logIn' element={<LogIn />} />
-                 <Route path='/usersList' element={<UsersList />} />
+                    <Route index element={<Home />} />
+                    <Route path='/logIn' element={<LogIn />} />
+                    <Route path='/usersList' element={<UsersList />} />
                 </Route>
             </Routes>
         </BrowserRouter>
