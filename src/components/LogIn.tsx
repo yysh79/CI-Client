@@ -61,13 +61,7 @@ function LogIn() {
             Submit
           </button>
         </form>
-        <GoogleLogin
-        clientId="YOUR_CLIENT_ID.apps.googleusercontent.com" // החלף כאן ב-Client ID שלך
-        buttonText="Login with Google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-      />
+     
       </div>
     </div>
   );
