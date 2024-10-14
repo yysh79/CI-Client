@@ -9,15 +9,11 @@ const LogOut: React.FC = () => {
     };
 
     return (
-        <button
-            onClick={handleLogout} 
-            className="mt-4 bg-red-600 text-white font-semibold flex items-center justify-center px-4 py-2 rounded-md hover:bg-red-500 transition duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-        >
-            <span className="material-icons mr-2">logout</span>
-            להתנתק
+        <button className="flex items-center space-x-2 p-2 bg-white rounded-lg shadow hover:bg-gray-100 transition duration-300">
+            <span className="material-icons text-gray-500" style={{ fontSize: '30px' }}>logout</span>
+            <div className="text-gray-700 font-semibold text-lg">להתנתק</div>
         </button>
     );
 }
 
 export default LogOut;
-
