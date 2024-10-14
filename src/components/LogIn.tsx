@@ -48,6 +48,7 @@ function Login() {
         setSuccessMessage('');
         setError('');
 
+
         try {
             const response = await fetch('http://localhost:3000/users/login', {
                 method: 'POST',
@@ -68,6 +69,9 @@ function Login() {
                 }, 3000);
             } else {
                 setError(data.message || 'Login failed');
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
             }
         } catch (error) {
             setError('Network error');
