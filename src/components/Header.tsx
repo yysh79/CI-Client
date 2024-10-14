@@ -34,7 +34,7 @@ const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
         </div>
       )}
 
-      <RxHamburgerMenu color='black' size={30} className="ml-auto hover:text-gray-500 transition duration-300" onClick={handleClick} />
+      <RxHamburgerMenu color='black' size={30} className="ml-auto hover:text-gray-500 transition duration-300 cursor-pointer" onClick={handleClick} />
     </div>
   );
 }
