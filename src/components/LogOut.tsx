@@ -1,24 +1,11 @@
 import React from 'react';
 
 const LogOut: React.FC = () => {
-    const handleLogout = async () => {
-        try {
-            
-            await fetch('http://localhost:3000/users/logout', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`, 
-                    'Content-Type': 'application/json',
-                },
-            });
+    const handleLogout = () => {
+        
+        localStorage.removeItem('token');
 
-            
-            localStorage.removeItem('token');
-
-            window.location.href = '/login'; 
-        } catch (error) {
-            console.error('Error logging out:', error);
-        }
+        window.location.href = '/login';
     };
 
     return (
