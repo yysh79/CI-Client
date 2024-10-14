@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "appwrite": "^16.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-google-login": "^5.2.2",
@@ -35,5 +38,4 @@
     "vite": "^5.4.1"
   },
   "proxy": "http://localhost:3000"
-
 }
