@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sideBarReducer from './sideBarSlice';
 import { SideBarState } from './sideBarSlice';
-
+import login from './userSlice'
 const store  = configureStore({
     reducer: {
-        sideBar: sideBarReducer
+        sideBar: sideBarReducer,
+        signIn: login 
     }
 });
 
