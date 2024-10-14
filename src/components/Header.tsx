@@ -6,8 +6,8 @@ import { useSelector, useDispatch,TypedUseSelectorHook } from 'react-redux';
 import { showSideBar } from '../store/sideBarSlice';
 import { AppDispatch } from '../store/store';
 import { Link, useLocation } from 'react-router-dom';
-
 import LogOut from './LogOut';
+
 const Header = () => {
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
