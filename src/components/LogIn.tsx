@@ -20,6 +20,7 @@ function Login() {
         e.preventDefault();
         setLoading(true);
         setSuccessMessage('');
+        setError('');
 
 
         try {
@@ -42,6 +43,9 @@ function Login() {
                 }, 3000);
             } else {
                 setError(data.message || 'Login failed');
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
             }
         } catch (error) {
             setError('Network error');
