@@ -7,7 +7,7 @@ import Otp from './Otp'
 import { logIn } from '../store/userSlice';
 import { AppDispatch } from '../store/store';
 import { useDispatch } from 'react-redux';
-
+import { FaRegEye } from "react-icons/fa";
 
 function Login() {
 
@@ -18,6 +18,13 @@ function Login() {
     const [successMessage, setSuccessMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [googleEmail, setGoogleEmail] = useState(''); 
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
+
+
 
     const navigate = useNavigate();
 
@@ -71,6 +78,10 @@ function Login() {
         } finally {
             setLoading(false);
         }
+        
+
+
+
     };
        
 
@@ -92,15 +103,20 @@ function Login() {
                     </div>
 
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 text-right">סיסמא</label>
-                        <input
-                            type="password"
-                            placeholder="הכנס את הסיסמא שלך"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-right"
-                        />
-                    </div>
+        <label htmlFor="password" className="block text-sm font-medium text-gray-700 text-right">סיסמא</label>
+        <div className="relative mt-1">
+            <input
+                type={isPasswordVisible ? 'text' : 'password'}
+                placeholder="הכנס את הסיסמא שלך"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-right pr-10" // הוספת padding справа
+            />
+            <span className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer" onClick={togglePasswordVisibility}>
+                <FaRegEye />
+            </span>
+        </div>
+    </div>
 
                     {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                     {successMessage && <p className="text-green-500 text-sm text-center">{successMessage}</p>}
