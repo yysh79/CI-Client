@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './Layout'
 import Home from '../pages/home/Home'
 import UsersList from '../components/UserList'
-import Login from '../components/Login';
+import Login from '../components/LogIn';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Otp from '../components/Otp'
 
