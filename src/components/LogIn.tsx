@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-
+import { Link} from 'react-router-dom';
+import Otp from './Otp'
+import { logIn } from '../store/userSlice';
+import { AppDispatch } from '../store/store';
+import { useDispatch } from 'react-redux';
 
 
 function Login() {
-    const [email, setEmail] = useState('');
+
+
+    const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -27,6 +33,7 @@ function Login() {
     const handleError = () => {
         console.log('Login Failed');
     };
+    const dispatch: AppDispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,6 +55,7 @@ function Login() {
             if (response.ok) {
                 console.log('Login successful:', data);
                 setSuccessMessage('! התחברות בהצלחה');
+                dispatch(logIn())
                 setTimeout(() => {
                     setSuccessMessage('');
                 }, 3000);
@@ -60,6 +68,8 @@ function Login() {
             setLoading(false);
         }
     };
+       
+
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-[url('/images/background-login.jpg')] bg-cover bg-center">
@@ -101,7 +111,13 @@ function Login() {
                     </button>
                 </form>
 
-                <p className="mt-4 text-center text-sm text-gray-600">
+               
+                   
+                <p  className={`w-full  'bg-gray-400' : 'bg-blue-500'} text-white py-3 px-4 rounded-md font-bold hover:bg-blue-600 transition duration-300 shadow-md`}>
+                       <Link to={"/otp"}>סיסמא במייל</Link>
+                   </p>
+               
+                <p className="mt-6 text-center text-sm text-gray-600">
                     אין לך חשבון? <a href="#" className="text-blue-500 hover:underline">צור חשבון</a>
                 </p>
 
@@ -117,5 +133,10 @@ function Login() {
         </div>
     );
 }
+
+    
+
+
+
 
 export default Login;

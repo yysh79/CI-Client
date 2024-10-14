@@ -5,7 +5,7 @@ import Home from '../pages/home/Home'
 import UsersList from '../components/UserList'
 import Login from '../components/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
+import Otp from '../components/Otp'
 
 function AppRoutes() {
 
@@ -17,12 +17,14 @@ function AppRoutes() {
                         <Route index element={<Home />} />
                         <Route path='login' element={<Login />} />
                         <Route path='/usersList' element={<UsersList />} />
+                        <Route path='/otp' element={<Otp />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
         </GoogleOAuthProvider>
+
     )
-    
+
 }
 
 export default AppRoutes

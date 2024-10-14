@@ -17,27 +17,47 @@ interface User {
 
 const UsersList: React.FC = () => {
     const [dataBase, setDataBase] = useState<User[]>([]);
+    const [searchValue, setSearchValue] = useState<string>('');
 
-    const fetchData = async () => {
+
+    const fetchData = async (searchQuery: string = '') => {
         try {
-            const response = await fetch('http://localhost:3000/users/getAllUsers');
-            const users: User[] = await response.json();
-            setDataBase(users);
+            const endpoint = searchQuery 
+                ? `http://localhost:3000/users/search/${searchQuery}` 
+                : 'http://localhost:3000/users/getAllUsers';
+
+            const response = await fetch(endpoint);
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+            const result = await response.json();
+            if (result.isSuccessful && Array.isArray(result.data)) {
+                setDataBase(result.data);
+            } else {
+                console.error('Unexpected response format:', result);
+            }
         } catch (error) {
-            console.log('Error: ', error);
+            console.error('Error fetching data:', error);
         }
     };
-    ////
+    
+    useEffect(() => {
+        fetchData(); 
+    }, []);
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSearchValue(value);
+        fetchData(value); // Fetch users based on search input
+    };
+   
     const updateUser = (updatedUser: User) => {
         setDataBase((prevUsers) =>
             prevUsers.map((user) => (user._id === updatedUser._id ? updatedUser : user))
         );
     };
-    ////    
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+      
+   
 
     const updateUserInDB = async (updatedUser: User) => {
         try {
@@ -88,28 +108,35 @@ const UsersList: React.FC = () => {
             <div className="flex gap-10 p-5">
                 <UserForm onSubmit={handleSubmit}/>
                 <ExportButton />
+                <input
+                    type="text"
+                    value={searchValue}
+                    onChange={handleSearchChange}
+                    className="border border-gray-400 p-2 rounded-lg"
+                    placeholder="Search users..."
+                />
             </div>
 
             <div className="p-5 pt-0">
-                <table className="w-full border-collapse text-right ">
+                <table className="w-full border-collapse text-right">
                     <thead>
                         <tr>
                             <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">פעולות</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">סיסמה</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">סיסמא</th>
                             <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">תפקיד</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">דואר אלקטרוני</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">טלפון נייד</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">דוא"ל</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">טלפון</th>
                             <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם משפחה</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם פרטי</th>
                         </tr>
                     </thead>
                     <tbody>
                         {dataBase.map((user) => (
-                            <tr key={user._id} className={`  'bg-white'}`}>
+                            <tr key={user._id} className="bg-white">
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
                                         <ConfirmationDialogue userId={user._id}/>
-                                        <EditButton user={user}  updateUser={updateUser} updateUserInDB={updateUserInDB} />
+                                        <EditButton user={user} updateUser={updateUser} updateUserInDB={updateUserInDB} />
                                     </div>
                                 </td>
                                 <td className="border border-gray-300 p-2 text-right">******</td>
@@ -123,7 +150,6 @@ const UsersList: React.FC = () => {
                     </tbody>
                 </table>
             </div>
-
         </>
     );
 };
