@@ -121,13 +121,13 @@ const UsersList: React.FC = () => {
                 <table className="w-full border-collapse text-right">
                     <thead>
                         <tr>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">Actions</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">Password</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">Role</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">Email</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">Phone</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">Last Name</th>
-                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">First Name</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">פעולות</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">סיסמא</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">תפקיד</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">דוא"ל</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">טלפון</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם משפחה</th>
+                            <th className="border border-gray-300 bg-gray-200 font-bold text-right p-2">שם פרטי</th>
                         </tr>
                     </thead>
                     <tbody>
