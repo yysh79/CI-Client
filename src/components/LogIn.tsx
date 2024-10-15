@@ -21,7 +21,10 @@ function Login() {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const togglePasswordVisibility = () => {
-        setIsPasswordVisible(!isPasswordVisible);
+        setIsPasswordVisible((e)=>(!e));
+        setTimeout(() => {
+            setIsPasswordVisible((e)=>(!e));
+        }, 1000);
     };
 
 
