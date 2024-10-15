@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
@@ -21,18 +21,39 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const handleSuccess = (credentialResponse: any) => {
-        const credential = credentialResponse.credential;
-        const decoded = jwtDecode(credential);
-        console.log('Decoded JWT:', decoded);
-
-        // After successful login, navigate to the desired page
-        navigate('../');  // Adjust the path according to your app
-    };
+    interface DecodedJWT {
+        email: string;
+    }
     
-    const handleError = () => {
-        console.log('Login Failed');
+
+    const checkIfUserExist = async (email: string) => {
+        const url = "http://localhost:3000/users/myLogInWithGoogle";
+        try {
+            const response = fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email}),
+            });
+            const data = (await response).json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     };
+
+    const handleSuccess = (credentialResponse: any) => {
+
+        const credential = credentialResponse.credential;
+        const decoded = jwtDecode<DecodedJWT>(credential);
+        console.log('Decoded JWT:', decoded.email);
+        checkIfUserExist(`${decoded.email}`);
+        navigate('../');
+
+    };
+
+
     const dispatch: AppDispatch = useDispatch();
 
     const handleSubmit = async (e) => {
@@ -122,7 +143,7 @@ function Login() {
                 </p>
 
                 <div className="mt-8">
-                    <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+                    <GoogleLogin onSuccess={handleSuccess}/>
                     {googleEmail && (
                         <p className="mt-4 text-center text-sm text-gray-600">
                             אימייל של Google: <span className="font-bold">{googleEmail}</span>
