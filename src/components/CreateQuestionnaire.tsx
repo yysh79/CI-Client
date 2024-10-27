@@ -13,7 +13,7 @@ const CreateQuestionnaire: React.FC = () => {
 
     const [showDiv, setShowDiv] = useState<Boolean>(false);
     const [array, setArray] = useState<JSX.Element[]>([]);
-    const [inputString, setInputString] = useState<String>('')
+    const [label, setLabel] = useState<string>('');
     const divRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,26 +32,34 @@ const CreateQuestionnaire: React.FC = () => {
 
                         {array.map((value, index) => (
                             <div key={index}>{value}</div>
-                        ))}
+                        ))};
+                        
+                        <input type="text"
+                        placeholder='הכנס כותרת לתיבת טקסט'
+                        value={label}
+                        onChange={(e)=>setLabel(e.target.value)}
+                        className="border p-2 rounded w-80  text-right"
+                        
+                        />
 
                         <i aria-label='Add' className="material-icons text-gray-300 mx-2 cursor-pointer hover:text-gray-400 text-6xl"
                             onClick={enter}>
                             add
                         </i>
                         {showDiv && (<div ref={divRef} className='bg-gray-200 rounded-lg p-4 border border-gray-400 w-96 flex justify-center space-x-6'>
-                            <i onClick={() => setArray([...array, <TextInput label='שם משתמש' />])}
+                            <i onClick={() =>{ setArray([...array, <TextInput label={label}/>]);setLabel('')}}
                                 aria-label='Text Fields'
                                 className='material-icons  text-gray-500 mx-2 cursor-pointer hover:text-gray-400 text-2xl'>text_fields
                             </i>
-                            <i onClick={() => setArray([...array, <NumberInput />])}
+                            <i onClick={() => {setArray([...array, <NumberInput label={label}/>]);setLabel('')}}
                                 aria-label='Pin'
                                 className='material-icons  text-gray-500 mx-2 cursor-pointer hover:text-gray-400 text-2xl'>pin
                             </i>
-                            <i onClick={() => setArray([...array, <Textarea />])}
+                            <i onClick={() => {setArray([...array, <Textarea label={label}/>]);setLabel('')}}
                                 aria-label='Segment'
                                 className='material-icons  text-gray-500 mx-2 cursor-pointer hover:text-gray-400 text-2xl'>segment
                             </i>
-                            <i onClick={() => setArray([...array, <Button />])}
+                            <i onClick={() => {setArray([...array, <Button label={label}/>]);setLabel('')}}
                                 aria-label='Dialpad'
                                 className='material-icons  text-gray-500 mx-2 cursor-pointer hover:text-gray-400 text-2xl'>dialpad
                             </i>

@@ -35,7 +35,8 @@ const ConfirmationDialogue: React.FC<ConfirmationDialogueProps> = ({userId}) => 
                     <div className="mt-4 flex justify-end space-x-2">
                        <Delete userId={userId} leave={leave}/>
                         <button
-                            className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                            className="bg-gray-300 text-gray-800 px-4 py-2 rounded
+                             hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300"
                             onClick={leave}
                         >
                             לא

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface NumberInputProps {
-  label: string;
+  label: String;
   placeholder?: string;
   required?: boolean;
   min?: number; 

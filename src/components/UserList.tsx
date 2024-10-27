@@ -148,7 +148,7 @@ const UsersList: React.FC = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table>s
             </div>
         </>
     );
