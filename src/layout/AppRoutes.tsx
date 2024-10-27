@@ -6,7 +6,7 @@ import UsersList from '../components/UserList'
 import Login from '../components/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Otp from '../components/Otp'
-
+import FormListContainer from '../formComponents/FormListContainer';
 function AppRoutes() {
 
     return (
@@ -18,6 +18,7 @@ function AppRoutes() {
                         <Route path='login' element={<Login />} />
                         <Route path='/usersList' element={<UsersList />} />
                         <Route path='/otp' element={<Otp />} />
+                        <Route path='/froms/getAllForms' element={< FormListContainer/>} />
                     </Route>
                 </Routes>
             </BrowserRouter>

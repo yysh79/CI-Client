@@ -49,21 +49,16 @@ function OTPPage() {
                 },
                 body: JSON.stringify({ email, otp }),
             });
-
             const data: ServerResponse = await response.json();
             setMessage(data.displayMessage);
             setIsSuccessful(data.isSuccessful); // עדכון לפי תוצאת האימות
         } catch (error) {
             console.error('Error:', error);
-            setMessage('An error occurred. Please try again.');
-        }
-    };
-
+            setMessage('An error occurred. Please try again.'); } };
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
                 <h2 className="mb-6 text-2xl font-bold text-center text-gray-700">OTP Authentication</h2>
-
                 {!otpRequested ? (
                     <form onSubmit={handleRequestOTP} className="space-y-4">
                         <input
@@ -89,8 +84,7 @@ function OTPPage() {
                             onChange={(e) => setOtp(e.target.value)}
                             placeholder="Enter OTP"
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        />
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                         <button
                             type="submit"
                             className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600"
