@@ -117,7 +117,7 @@ const UsersList: React.FC = () => {
                 />
             </div>
 
-            <div className="p-5 pt-0">
+            <div className="p-5 pt-0 ">
                 <table className="w-full border-collapse text-right">
                     <thead>
                         <tr>
@@ -132,7 +132,7 @@ const UsersList: React.FC = () => {
                     </thead>
                     <tbody>
                         {dataBase.map((user) => (
-                            <tr key={user._id} className="bg-white">
+                            <tr key={user._id} className="bg-white hover:bg-gray-100">
                                 <td className="border border-gray-300 p-2 text-center">
                                     <div className="flex justify-center space-x-2">
                                         <ConfirmationDialogue userId={user._id}/>

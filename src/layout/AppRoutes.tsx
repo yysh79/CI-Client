@@ -6,6 +6,7 @@ import UsersList from '../components/UserList'
 import Login from '../components/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Otp from '../components/Otp'
+import CreateQuestionnaire from '../components/CreateQuestionnaire';
 
 function AppRoutes() {
 
@@ -18,6 +19,7 @@ function AppRoutes() {
                         <Route path='login' element={<Login />} />
                         <Route path='/usersList' element={<UsersList />} />
                         <Route path='/otp' element={<Otp />} />
+                        <Route path='/CreateQuestionnaire' element={<CreateQuestionnaire/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>
