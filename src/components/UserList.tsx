@@ -62,7 +62,7 @@ const UsersList: React.FC = () => {
     const updateUserInDB = async (updatedUser: User) => {
         try {
             const response = await fetch(`http://localhost:3000/users/updateUser/${updatedUser._id}`, {
-                method: 'PUT', // או PATCH אם אתה מעדיף
+                method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json',
                 },
