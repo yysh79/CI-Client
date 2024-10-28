@@ -27,10 +27,13 @@ const UsersList: React.FC = () => {
                 : 'http://localhost:3000/users/getAllUsers';
 
             const response = await fetch(endpoint);
+
             if (!response.ok) {
                 throw new Error('Failed to fetch users');
             }
+
             const result = await response.json();
+            
             if (result.isSuccessful && Array.isArray(result.data)) {
                 setDataBase(result.data);
             } else {

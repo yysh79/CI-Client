@@ -51,13 +51,10 @@ function Login() {
     };
 
     const handleSuccess = (credentialResponse: any) => {
-
         const credential = credentialResponse.credential;
         const decoded = jwtDecode<DecodedJWT>(credential);
-        console.log('Decoded JWT:', decoded.email);
         checkIfUserExist(`${decoded.email}`);
         navigate('../');
-
     };
 
 

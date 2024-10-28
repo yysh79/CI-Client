@@ -41,7 +41,6 @@ const EditButton: React.FC<EditButtonProps> = ({ user ,updateUser ,updateUserInD
     };
   }, []);
 
-  // Handle input changes
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     field: keyof User
@@ -52,14 +51,12 @@ const EditButton: React.FC<EditButtonProps> = ({ user ,updateUser ,updateUserInD
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log("Updated user:", editedUser);
     updateUser(editedUser);
     await updateUserInDB(editedUser); 
-    // Here, you would typically update the user via an API or save it to state
-    leave(); // Close the dialog after submission
+    leave();
   };
 
   return (
