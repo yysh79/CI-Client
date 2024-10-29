@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface TextareaProps {
-  label: string;
+  label: String;
   placeholder?: string;
   required?: boolean;
   minLength?: number; 
