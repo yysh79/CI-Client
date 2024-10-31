@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 interface SelectOption {
   value: string;
-  label: string; 
+  label: String; 
 }
 
 interface SelectProps {

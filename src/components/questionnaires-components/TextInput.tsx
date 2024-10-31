@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface TextInputProps {
-  label: string;
+  label: String;
   placeholder?: string;
   required?: boolean;
   validationPattern?: RegExp;
