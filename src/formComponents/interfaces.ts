@@ -1,6 +1,8 @@
 // interfaces.ts
 
 export interface Field {
+  _id: any
+  formId : string;
     name: string;
     label: string;
     type: string;
@@ -20,7 +22,7 @@ export interface FormDocument {
     _id: string;
     title: string;
     description?: string;
-    city?: string;
+    city: string;
     fields: Field[]; // ניתן גם להשתמש ב-FormField אם יש שדות שונים
     createdAt: Date;
   }
@@ -32,8 +34,11 @@ export interface FormDocument {
     forms: FormDocument[]; // רשימה של טפסים
   }
   export interface FieldProps {
+    _id: any
+    formId: string;
     name: string;
     label: string;
     type: string;
+
   }
   

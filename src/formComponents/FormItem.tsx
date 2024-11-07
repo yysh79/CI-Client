@@ -9,7 +9,7 @@ const FormItem: React.FC<FormItemProps> = ({ form }) => {
   <h2 className="text-2xl font-semibold text-blue-900 mb-4">{form.title}</h2>
   <div className="space-y-4">
     {form.fields.map((field, index) => (
-      <Fielda key={index} {...field} />
+      <Fielda key={index} {...field}  formId={form._id} />
     ))}
   </div>
 </div>
